@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+.next/
+dist/
+build/
+out/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.cursor/
+
+# TypeScript / test
+*.tsbuildinfo
+coverage/
+
+# Misc
+.antigravityignore
+__pycache__/
+*.pyc
+*.pyo
+lint_output.txt
+
+# Local status docs that may contain real credentials (keep private)
+LMS-master/LMS-master/STATUS.md
+LMS-master/LMS-master/DEBUG_REGISTRATION.md

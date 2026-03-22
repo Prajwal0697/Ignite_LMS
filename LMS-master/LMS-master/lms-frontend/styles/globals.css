@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f172a;
+  --surface: #111827;
+  --accent: #ffffff;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* ── Glassmorphism ─────────────────────────── */
+  .glass {
+    @apply backdrop-blur-md bg-white/5 border border-white/10;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/40 border border-white/5;
+  }
+
+  /* ── Buttons ─────────────────────────────── */
+  .btn-premium {
+    @apply relative inline-flex items-center justify-center px-6 py-3 rounded-2xl font-bold text-sm uppercase tracking-widest transition-all duration-300 active:scale-95;
+    background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+    color: #0f172a;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.12);
+  }
+  .btn-premium:hover {
+    @apply scale-[1.02] shadow-[0_8px_30px_rgba(255,255,255,0.2)];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl font-bold text-sm uppercase tracking-widest border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300;
+  }
+
+  /* ── Inputs ──────────────────────────────── */
+  .input-premium {
+    @apply w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm text-text-primary focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all duration-300;
+  }
+
+  /* ── Cards ───────────────────────────────── */
+  .card-premium {
+    @apply bg-surface border border-white/5 rounded-[2rem] overflow-hidden transition-all duration-500;
+  }
+  .card-premium:hover {
+    @apply border-accent/20 shadow-2xl shadow-black/50;
+  }
+
+  /* ── Chat Bubbles ────────────────────────── */
+  .chat-bubble-ai {
+    @apply glass-dark rounded-3xl rounded-tl-none px-6 py-4 text-[15px] leading-relaxed text-text-secondary;
+  }
+  .chat-bubble-user {
+    @apply bg-accent text-background font-semibold rounded-3xl rounded-tr-none px-6 py-4 text-[15px] leading-relaxed shadow-lg shadow-accent/10;
+  }
+}
+
+/* ── Custom Utilities ─────────────────────────── */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Animations ───────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.animate-fade-up { animation: fade-up 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) both; }
+.animate-fade-in { animation: fade-in 0.8s ease both; }
+
+/* ── Noise & Glow ───────────────────────────── */
+.bg-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Noise overlay ───────────────────────────── */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+  z-index: 9999;
+}
