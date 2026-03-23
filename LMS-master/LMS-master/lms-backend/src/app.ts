@@ -25,7 +25,14 @@ app.use(cors({
     'http://127.0.0.1:3001',
     'http://127.0.0.1:3002',
     'http://127.0.0.1:3003',
-    env.cors.origin
+    env.cors.origin,
+    // Allow all Vercel deployments
+    /\.vercel\.app$/,
+    // Allow all Render deployments
+    /\.onrender\.com$/,
+    // Allow custom domains
+    'https://ignite-lms.vercel.app',
+    'https://www.ignite-lms.vercel.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -34,6 +41,16 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
+
+// ── Root route ───────────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'LMS Backend running successfully',
+    status: 'active',
+    timestamp: new Date().toISOString(),
+    environment: env.nodeEnv
+  });
+});
 
 // ── Routes ───────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
