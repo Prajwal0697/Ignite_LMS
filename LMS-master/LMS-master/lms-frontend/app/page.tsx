@@ -23,7 +23,7 @@ export default function HomePage() {
   }, []);
 
   const categories = useMemo(() => {
-    const cats = ['All', ...new Set(subjects.map(s => s.category))];
+    const cats = ['All', ...Array.from(new Set(subjects.map(s => s.category)))];
     return cats;
   }, [subjects]);
 
