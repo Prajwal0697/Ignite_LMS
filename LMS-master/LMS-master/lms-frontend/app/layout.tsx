@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         setAuth(data.accessToken, { sub: payload.sub, email: payload.email });
       })
       .catch(() => clearAuth());
-  }, []);
+  }, [setAuth, clearAuth]);
 
   return (
     <html lang="en" suppressHydrationWarning>

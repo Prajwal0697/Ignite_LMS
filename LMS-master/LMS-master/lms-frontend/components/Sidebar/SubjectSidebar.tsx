@@ -31,7 +31,7 @@ export default function SubjectSidebar({ subjectId }: Props) {
       .then(({ data }) => setSidebar(data.title, data.sections))
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [subjectId]);
+  }, [subjectId, setSidebar, setLoading, setError]);
 
   const toggleSection = (id: number) =>
     setCollapsed((prev) => ({ ...prev, [id]: !prev[id] }));

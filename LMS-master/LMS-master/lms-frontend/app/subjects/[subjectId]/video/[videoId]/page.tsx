@@ -76,14 +76,14 @@ export default function VideoPage() {
         .finally(() => setYtLoading(false));
 
     }).catch(console.error).finally(() => setLoading(false));
-  }, [videoId, subjectId]);
+  }, [videoId, subjectId, storeSetVideo, setNavigation]);
 
   const handleCompleted = useCallback(() => {
     setCompleted(true);
     markVideoCompleted(parseInt(videoId as string));
     setShowComplete(true);
     setTimeout(() => setShowComplete(false), 5000);
-  }, [videoId]);
+  }, [videoId, markVideoCompleted, setCompleted]);
 
   const goNext = () => {
     if (video?.next_video_id) router.push(`/subjects/${subjectId}/video/${video.next_video_id}`);
